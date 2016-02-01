@@ -2,7 +2,7 @@
 
 **Yelp1** is a Yelp search app using the [Yelp API](http://www.yelp.com/developers/documentation/v2/search_api).
 
-Time spent: **3** hours spent in total
+Time spent: **4** hours spent in total
 
 ## User Stories
 
@@ -10,7 +10,7 @@ The following **required** functionality is completed:
 
 - [x] Table rows for search results should be dynamic height according to the content height.
 - [x] Custom cells should have the proper Auto Layout constraints.
-- [ ] Search bar should be in the navigation bar (doesn't have to expand to show location like the real Yelp app does).
+- [x] Search bar should be in the navigation bar (doesn't have to expand to show location like the real Yelp app does).
 
 The following **optional** features are implemented:
 
@@ -25,14 +25,14 @@ The following **additional** features are implemented:
 
 Please list two areas of the assignment you'd like to **discuss further with your peers** during the next class (examples include better ways to implement something, how to extend your app in certain ways, etc):
 
-1. 
-2. 
+1. Best way to implement search bar
+2. How to get animations into the search bar
 
 ## Video Walkthrough 
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='http://i.imgur.com/EbY0jJC.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
@@ -42,7 +42,7 @@ Describe any challenges encountered while building the app.
 
 ## License
 
-    Copyright [yyyy] [name of copyright owner]
+    Copyright [2016] [Shakeeb Majid]
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
