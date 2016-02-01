@@ -36,8 +36,7 @@ class BusinessCell: UITableViewCell {
             addressLabel.text = business.address
             reviewsLabel.text = "\(business.reviewCount!) Reviews"
             ratingsView.setImageWithURL(business.ratingImageURL!)
-            //print(business.ratingImageURL)
-            //print(business.imageURL)
+            distanceLabel.text = business.distance
             
         }
        
@@ -50,10 +49,19 @@ class BusinessCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        
+        nameLabel.preferredMaxLayoutWidth = nameLabel.frame.size.width
         
         
         // Initialization code
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        nameLabel.preferredMaxLayoutWidth = nameLabel.frame.size.width
+        
+        
+        
     }
 
     override func setSelected(selected: Bool, animated: Bool) {

@@ -11,19 +11,27 @@ import UIKit
 class BusinessesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     var businesses: [Business]!
-    
-    
+    var searchController: UISearchController!
+    var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
-   
+    var filteredData: [String]!
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        searchBar = UISearchBar()
+        searchBar.sizeToFit()
+        navigationItem.titleView = searchBar
+        
+            
+            
+            
         tableView.delegate = self
         tableView.dataSource = self
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 120
-        
         
         
         Business.searchWithTerm("Thai", completion: { (businesses: [Business]!, error: NSError!) -> Void in
@@ -46,6 +54,8 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
         }
 */
     }
+    
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
