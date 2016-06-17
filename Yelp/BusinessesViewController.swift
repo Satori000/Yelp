@@ -8,14 +8,14 @@
 
 import UIKit
 
-class BusinessesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class BusinessesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
 
     var businesses: [Business]!
     var searchController: UISearchController!
     var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     var filteredData: [String]!
-    
+    var isMoreDataLoading = false
     
     
     override func viewDidLoad() {
@@ -38,8 +38,8 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
             self.businesses = businesses
             self.tableView.reloadData()
             for business in businesses {
-                print(business.name!)
-                print(business.address!)
+                //print(business.name!)
+                //print(business.address!)
             }
         })
 
@@ -67,6 +67,8 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if businesses != nil {
+            print(businesses!.count)
+            
             return businesses!.count
         } else {
             return 0
@@ -84,6 +86,51 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
         
         return cell
     }
+    
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        // Handle scroll behavior here
+         print("hello")
+        if (!isMoreDataLoading) {
+            
+             print("hello 0")
+            let scrollViewContentHeight = tableView.contentSize.height
+            let scrollOffsetThreshold = scrollViewContentHeight - tableView.bounds.size.height
+            
+            // When the user has scrolled past the threshold, start requesting
+            if(scrollView.contentOffset.y > scrollOffsetThreshold && tableView.dragging) {
+                isMoreDataLoading = true
+                 print("hello1")
+                loadMoreData()
+                // ... Code to load more results ...
+            }
+            
+            
+            // ... Code to load more results ...
+            
+        }
+        
+        
+        
+        
+        
+        
+    }
+    
+    func loadMoreData() {
+         print("hello2")
+        Business.searchWithTerm("Thai", offset: businesses.count, completion: { (businesses: [Business]!, error: NSError!) -> Void in
+            print("success")
+            for business in businesses {
+                self.businesses.append(business)
+            }
+            self.isMoreDataLoading = false
+
+            //self.businesses = businesses
+            self.tableView.reloadData()
+        })
+        
+    }
+    
     /*
     // MARK: - Navigation
 
@@ -95,3 +142,43 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
     */
 
 }
+
+
+
+
+
+
+
+// ... Create the NSURLRequest (myRequest) ...
+/*var myRequest = Business.searchWithTerm("Thai", offset: businesses.count, completion: { (businesses: [Business]!, error: NSError!) -> Void in
+ self.businesses = businesses
+ self.tableView.reloadData()
+ for business in businesses {
+ print(business.name!)
+ print(business.address!)
+ }
+ }) as! NSURLRequest
+ 
+ print("hello3")
+ 
+ 
+ // Configure session so that completion handler is executed on main UI thread
+ let session = NSURLSession(
+ configuration: NSURLSessionConfiguration.defaultSessionConfiguration(),
+ delegate:nil,
+ delegateQueue:NSOperationQueue.mainQueue()
+ )
+ 
+ let task : NSURLSessionDataTask = session.dataTaskWithRequest(myRequest,
+ completionHandler: { (data, response, error) in
+ 
+ // Update flag
+ self.isMoreDataLoading = false
+ 
+ // ... Use the new data to update the data source ...
+ 
+ // Reload the tableView now that there is new data
+ self.tableView.reloadData()
+ });
+ task.resume() */
+
