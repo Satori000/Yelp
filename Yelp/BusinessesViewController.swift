@@ -131,15 +131,25 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
         
     }
     
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let sender = sender as? UITableViewCell {
+            let cell = sender as! BusinessCell
+            let business = cell.business
+            
+            let detailVC = segue.destinationViewController as! DetailViewController
+            
+            detailVC.business = business
+            
+            
+        }
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
     }
-    */
+    
 
 }
 
