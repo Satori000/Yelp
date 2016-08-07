@@ -79,23 +79,28 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
-        var cell = tableView.dequeueReusableCellWithIdentifier("BusinessCell", forIndexPath: indexPath) as! BusinessCell
-        
+        print("BEFORE cell initialized")
+
+        let cell = tableView.dequeueReusableCellWithIdentifier("BusinessCell", forIndexPath: indexPath) as! BusinessCell
+        print("BEFORE business set")
+        print("index path: \(indexPath), count: \(businesses!.count)")
         cell.business = businesses[indexPath.row]
+        
+        print("dictionary \(cell.business.dictionary!)")
         
         return cell
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
         // Handle scroll behavior here
-         print("hello")
+        print("hello")
         if (!isMoreDataLoading) {
             
-             print("hello 0")
+            print("hello 0")
             let scrollViewContentHeight = tableView.contentSize.height
             let scrollOffsetThreshold = scrollViewContentHeight - tableView.bounds.size.height
-            
+            print("hello 0.5")
+
             // When the user has scrolled past the threshold, start requesting
             if(scrollView.contentOffset.y > scrollOffsetThreshold && tableView.dragging) {
                 isMoreDataLoading = true
@@ -118,15 +123,20 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
     
     func loadMoreData() {
          print("hello2")
-        Business.searchWithTerm("Thai", offset: businesses.count, completion: { (businesses: [Business]!, error: NSError!) -> Void in
-            print("success")
-            for business in businesses {
-                self.businesses.append(business)
+        Business.searchWithTerm("Thai", offset: businesses.count, completion: { (businesses: [Business]?, error: NSError?) -> Void in
+            if let businesses = businesses {
+                print("success")
+                for business in businesses {
+                    self.businesses.append(business)
+                }
+                self.isMoreDataLoading = false
+                
+                //self.businesses = businesses
+                self.tableView.reloadData()
+            } else if let error = error {
+                print("error: \(error)")
             }
-            self.isMoreDataLoading = false
-
-            //self.businesses = businesses
-            self.tableView.reloadData()
+           
         })
         
     }

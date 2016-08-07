@@ -18,17 +18,22 @@ class Business: NSObject {
     let reviewCount: NSNumber?
     let snippetText: String?
     let coordinates: NSDictionary?
+    let dictionary: NSDictionary?
     
     init(dictionary: NSDictionary) {
+        print("hello before setting name")
         name = dictionary["name"] as? String
-        
+        self.dictionary = dictionary
+        print("hello before setting image")
+
         let imageURLString = dictionary["image_url"] as? String
         if imageURLString != nil {
             imageURL = NSURL(string: imageURLString!)!
         } else {
             imageURL = nil
         }
-        
+        print("hello before setting location")
+
         let location = dictionary["location"] as? NSDictionary
         var address = ""
         if location != nil {
@@ -46,7 +51,8 @@ class Business: NSObject {
             }
         }
         self.address = address
-        
+        print("hello before setting category")
+
         let categoriesArray = dictionary["categories"] as? [[String]]
         if categoriesArray != nil {
             var categoryNames = [String]()
@@ -58,7 +64,8 @@ class Business: NSObject {
         } else {
             categories = nil
         }
-        
+        print("hello before setting distance")
+
         let distanceMeters = dictionary["distance"] as? NSNumber
         if distanceMeters != nil {
             let milesPerMeter = 0.000621371
@@ -66,16 +73,26 @@ class Business: NSObject {
         } else {
             distance = nil
         }
+        print("hello before setting rating")
         
         let ratingImageURLString = dictionary["rating_img_url_large"] as? String
+        print(ratingImageURLString)
         if ratingImageURLString != nil {
             ratingImageURL = NSURL(string: ratingImageURLString!)
         } else {
             ratingImageURL = nil
         }
-        coordinates = dictionary["location"]!["coordinate"] as! NSDictionary
+        print("hello before setting coordinates")
+        coordinates = location!["coordinate"] as? NSDictionary
+        
+        print("hello before setting count")
+
         reviewCount = dictionary["review_count"] as? NSNumber
+        print("hello before setting snippet")
+
         snippetText = dictionary["snippet_text"] as? String
+        print("hello after setting everything")
+
     }
     
     class func businesses(array array: [NSDictionary]) -> [Business] {
