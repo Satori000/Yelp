@@ -146,64 +146,60 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KDw-2l-BdL">
-                                <rect key="frame" x="11" y="79" width="83" height="93"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bTd-Q7-NUV">
-                                <rect key="frame" x="102" y="113" width="83" height="15"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="15" id="A7I-5U-CrR"/>
-                                    <constraint firstAttribute="width" constant="83" id="rDM-au-Xjk"/>
-                                </constraints>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="88 Division St. Missions Bay" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7cR-Pi-zEc">
-                                <rect key="frame" x="98" y="137" width="218" height="16"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                <color key="textColor" red="0.41449198300000001" green="0.41449198300000001" blue="0.41449198300000001" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Thai, Seafood, Salad" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RGb-5q-2mB">
-                                <rect key="frame" x="98" y="169" width="125" height="16"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                <color key="textColor" red="0.41449198300000001" green="0.41449198300000001" blue="0.41449198300000001" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="469 Reviews" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Bi-pJ-zC7">
-                                <rect key="frame" x="200" y="113" width="78" height="16"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                <color key="textColor" red="0.41449198300000001" green="0.41449198300000001" blue="0.41449198300000001" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="1. Grand Pu Bah" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gZV-dF-LII">
-                                <rect key="frame" x="113" y="79" width="129" height="21"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="foH-7O-fxl">
-                                <rect key="frame" x="31" y="237" width="263" height="274"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="274" id="Bp5-Cj-Jz8"/>
-                                    <constraint firstAttribute="width" constant="263" id="vHD-C2-8FL"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hkS-Jf-m5Y">
+                                <rect key="frame" x="0.0" y="158" width="320" height="353"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Thai, Seafood, Salad" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RGb-5q-2mB">
+                                        <rect key="frame" x="85" y="75" width="125" height="16"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <color key="textColor" red="0.41449198300000001" green="0.41449198300000001" blue="0.41449198300000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bTd-Q7-NUV">
+                                        <rect key="frame" x="85" y="34" width="83" height="15"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="88 Division St. Missions Bay" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7cR-Pi-zEc">
+                                        <rect key="frame" x="85" y="57" width="175" height="16"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <color key="textColor" red="0.41449198300000001" green="0.41449198300000001" blue="0.41449198300000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="469 Reviews" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Bi-pJ-zC7">
+                                        <rect key="frame" x="176" y="33" width="78" height="16"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <color key="textColor" red="0.41449198300000001" green="0.41449198300000001" blue="0.41449198300000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" fixedFrame="YES" text="1. Grand Pu Bah" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gZV-dF-LII">
+                                        <rect key="frame" x="85" y="8" width="129" height="21"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KDw-2l-BdL">
+                                        <rect key="frame" x="8" y="8" width="69" height="67"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="foH-7O-fxl">
+                                        <rect key="frame" x="8" y="99" width="304" height="140"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="RGb-5q-2mB" firstAttribute="top" secondItem="7cR-Pi-zEc" secondAttribute="bottom" constant="8" id="9wn-hZ-YwU"/>
-                            <constraint firstItem="bTd-Q7-NUV" firstAttribute="top" secondItem="gZV-dF-LII" secondAttribute="bottom" constant="5" id="Cro-k8-bQG"/>
-                            <constraint firstItem="0Bi-pJ-zC7" firstAttribute="centerY" secondItem="bTd-Q7-NUV" secondAttribute="centerY" id="KAn-nQ-cdc"/>
-                            <constraint firstItem="RGb-5q-2mB" firstAttribute="leading" secondItem="7cR-Pi-zEc" secondAttribute="leading" id="VT5-oi-THD"/>
-                            <constraint firstItem="7cR-Pi-zEc" firstAttribute="top" secondItem="0Bi-pJ-zC7" secondAttribute="bottom" constant="3" id="luh-Ut-qG2"/>
-                            <constraint firstItem="0Bi-pJ-zC7" firstAttribute="leading" secondItem="bTd-Q7-NUV" secondAttribute="trailing" constant="8" id="y8f-w9-akB"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="5OS-s7-jEg"/>
                     <connections>
-                        <outlet property="snippetLabel" destination="foH-7O-fxl" id="WZE-r4-iAm"/>
+                        <outlet property="addressLabel" destination="7cR-Pi-zEc" id="4eN-0w-hYD"/>
+                        <outlet property="categoriesLabel" destination="RGb-5q-2mB" id="HGi-yV-qqs"/>
+                        <outlet property="nameLabel" destination="gZV-dF-LII" id="Bdq-N8-ltk"/>
+                        <outlet property="ratingsView" destination="bTd-Q7-NUV" id="qPw-7G-kof"/>
+                        <outlet property="reviewCountLabel" destination="0Bi-pJ-zC7" id="vEH-7J-QhJ"/>
+                        <outlet property="snippetLabel" destination="foH-7O-fxl" id="qMA-vA-8Id"/>
+                        <outlet property="thumnailView" destination="KDw-2l-BdL" id="4ye-ZP-U9J"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xdY-Zt-HJh" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -7,15 +7,44 @@
 //
 
 import UIKit
+import AFNetworking
 
 class DetailViewController: UIViewController {
     
-    var business : Business?
-
+    @IBOutlet weak var thumnailView: UIImageView!
+    
+    @IBOutlet weak var nameLabel: UILabel!
+    
+    @IBOutlet weak var ratingsView: UIImageView!
+    
+    @IBOutlet weak var addressLabel: UILabel!
+    
+    @IBOutlet weak var categoriesLabel: UILabel!
+    
+    @IBOutlet weak var reviewCountLabel: UILabel!
+    
     @IBOutlet weak var snippetLabel: UILabel!
     
+    var business : Business?
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        nameLabel.text = business!.name
+        if business!.imageURL != nil {
+            thumnailView.setImageWithURL(business!.imageURL!)
+            
+        }
+        
+        categoriesLabel.text = business!.categories
+        
+        addressLabel.text = business!.address
+        reviewCountLabel.text = "\(business!.reviewCount!) Reviews"
+        
+        ratingsView.setImageWithURL(business!.ratingImageURL!)
+        
+        //distanceLabel.text = business.distance
+
         
         snippetLabel.text = business!.snippetText
         
