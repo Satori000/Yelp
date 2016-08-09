@@ -72,6 +72,8 @@ class YelpClient: BDBOAuth1RequestOperationManager {
                 completion(nil, error)
         })!
     }
+    
+    
 
     
     func searchWithTerm(term: String, sort: YelpSortMode?, categories: [String]?, deals: Bool?, completion: ([Business]!, NSError!) -> Void) -> AFHTTPRequestOperation {
@@ -103,4 +105,26 @@ class YelpClient: BDBOAuth1RequestOperationManager {
                 completion(nil, error)
         })!
     }
+    
+    func businessWithID(id: String, completion: (NSDictionary!, NSError!) -> Void) -> AFHTTPRequestOperation {
+        print("yelp client class reached")
+        var parameters: [String : AnyObject] = [:]
+        
+        print("yelp about to get")
+        print("id: \(id)")
+        return self.GET("business/\(id)", parameters: parameters, success: { (operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
+            print("inside retuuuuuuuuurn")
+            let dictionary = response as? NSDictionary
+            if dictionary != nil {
+                print("dictionary not equal nil")
+                completion(dictionary!, nil)
+            }
+            }, failure: { (operation: AFHTTPRequestOperation?, error: NSError!) -> Void in
+                print("failure: \(error)")
+                completion(nil, error)
+        })!
+    }
+
+    
+    
 }

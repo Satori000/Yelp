@@ -21,10 +21,10 @@ class Business: NSObject {
     let dictionary: NSDictionary?
     
     init(dictionary: NSDictionary) {
-        print("hello before setting name")
+        //print("hello before setting name")
         name = dictionary["name"] as? String
         self.dictionary = dictionary
-        print("hello before setting image")
+        //print("hello before setting image")
 
         let imageURLString = dictionary["image_url"] as? String
         if imageURLString != nil {
@@ -32,7 +32,7 @@ class Business: NSObject {
         } else {
             imageURL = nil
         }
-        print("hello before setting location")
+        //print("hello before setting location")
 
         let location = dictionary["location"] as? NSDictionary
         var address = ""
@@ -51,7 +51,7 @@ class Business: NSObject {
             }
         }
         self.address = address
-        print("hello before setting category")
+        //print("hello before setting category")
 
         let categoriesArray = dictionary["categories"] as? [[String]]
         if categoriesArray != nil {
@@ -64,7 +64,7 @@ class Business: NSObject {
         } else {
             categories = nil
         }
-        print("hello before setting distance")
+        //print("hello before setting distance")
 
         let distanceMeters = dictionary["distance"] as? NSNumber
         if distanceMeters != nil {
@@ -73,25 +73,25 @@ class Business: NSObject {
         } else {
             distance = nil
         }
-        print("hello before setting rating")
+        //print("hello before setting rating")
         
         let ratingImageURLString = dictionary["rating_img_url_large"] as? String
-        print(ratingImageURLString)
+        //print(ratingImageURLString)
         if ratingImageURLString != nil {
             ratingImageURL = NSURL(string: ratingImageURLString!)
         } else {
             ratingImageURL = nil
         }
-        print("hello before setting coordinates")
+        //print("hello before setting coordinates")
         coordinates = location!["coordinate"] as? NSDictionary
         
-        print("hello before setting count")
+        //print("hello before setting count")
 
         reviewCount = dictionary["review_count"] as? NSNumber
-        print("hello before setting snippet")
+        //print("hello before setting snippet")
 
         snippetText = dictionary["snippet_text"] as? String
-        print("hello after setting everything")
+        //print("hello after setting everything")
 
     }
     
@@ -112,6 +112,13 @@ class Business: NSObject {
         YelpClient.sharedInstance.searchWithTerm(term, offset: offset, completion: completion)
         
     }
+    
+    class func businessWithID(id: String, completion: (NSDictionary!, NSError!) -> Void) {
+        print("business class reached")
+        YelpClient.sharedInstance.businessWithID(id, completion: completion)
+        
+    }
+    
     
     
     class func searchWithTerm(term: String, sort: YelpSortMode?, categories: [String]?, deals: Bool?, completion: ([Business]!, NSError!) -> Void) -> Void {

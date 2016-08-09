@@ -82,29 +82,29 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
         print("BEFORE cell initialized")
 
         let cell = tableView.dequeueReusableCellWithIdentifier("BusinessCell", forIndexPath: indexPath) as! BusinessCell
-        print("BEFORE business set")
-        print("index path: \(indexPath), count: \(businesses!.count)")
+        //print("BEFORE business set")
+        //print("index path: \(indexPath), count: \(businesses!.count)")
         cell.business = businesses[indexPath.row]
         
-        print("dictionary \(cell.business.dictionary!)")
+        //print("dictionary \(cell.business.dictionary!)")
         
         return cell
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
         // Handle scroll behavior here
-        print("hello")
+        //print("hello")
         if (!isMoreDataLoading) {
             
-            print("hello 0")
+            //print("hello 0")
             let scrollViewContentHeight = tableView.contentSize.height
             let scrollOffsetThreshold = scrollViewContentHeight - tableView.bounds.size.height
-            print("hello 0.5")
+            //print("hello 0.5")
 
             // When the user has scrolled past the threshold, start requesting
             if(scrollView.contentOffset.y > scrollOffsetThreshold && tableView.dragging) {
                 isMoreDataLoading = true
-                 print("hello1")
+                 //print("hello1")
                 loadMoreData()
                 // ... Code to load more results ...
             }
@@ -122,7 +122,7 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     func loadMoreData() {
-         print("hello2")
+         //print("hello2")
         Business.searchWithTerm("Thai", offset: businesses.count, completion: { (businesses: [Business]?, error: NSError?) -> Void in
             if let businesses = businesses {
                 print("success")

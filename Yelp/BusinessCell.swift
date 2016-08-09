@@ -29,28 +29,28 @@ class BusinessCell: UITableViewCell {
     
     var business: Business! {
         didSet{
-            print("before name")
+            //print("before name")
             nameLabel.text = business.name
-            print("before thumbnail")
-            print(business.imageURL)
+            //print("before thumbnail")
+            //print(business.imageURL)
             if business.imageURL != nil {
                 thumbnailView.setImageWithURL(business.imageURL!)
 
             }
             //thumbnailView.setImageWithURL(business.imageURL!)
-            print("before categories")
+            //print("before categories")
 
             categoriesLabel.text = business.categories
-            print("before address")
+            //print("before address")
 
             addressLabel.text = business.address
-            print("before reviews")
+            //print("before reviews")
 
             reviewsLabel.text = "\(business.reviewCount!) Reviews"
-            print("before ratings")
+            //print("before ratings")
 
             ratingsView.setImageWithURL(business.ratingImageURL!)
-            print("before distance")
+            //print("before distance")
 
             distanceLabel.text = business.distance
             

@@ -9,7 +9,7 @@
 import UIKit
 import AFNetworking
 
-class DetailViewController: UIViewController {
+class DetailViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var thumnailView: UIImageView!
     
@@ -25,10 +25,17 @@ class DetailViewController: UIViewController {
     
     @IBOutlet weak var snippetLabel: UILabel!
     
+    @IBOutlet weak var tableView: UITableView!
+    
     var business : Business?
+    
+    var reviews: [NSDictionary]?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        tableView.delegate = self
+        tableView.dataSource = self
         
         nameLabel.text = business!.name
         if business!.imageURL != nil {
@@ -43,6 +50,27 @@ class DetailViewController: UIViewController {
         
         ratingsView.setImageWithURL(business!.ratingImageURL!)
         
+        Business.businessWithID(business!.dictionary!["id"] as! String, completion: { (business: NSDictionary!, error: NSError!) -> Void in
+           print("helllloeweifwooweieieieieiieieieiieieiieieieiieieiieieieie")
+            print("business: \(business)")
+            
+            if let error = error {
+                print("Error: \(error)")
+            }
+            
+        })
+        
+        
+        
+        
+        print(business!.dictionary!["id"] as! String)
+        
+        
+        print("hey right before the reviews")
+        //reviews = business!.dictionary!["reviews"] as! [NSDictionary]
+        
+        tableView.reloadData()
+        
         //distanceLabel.text = business.distance
 
         
@@ -56,6 +84,27 @@ class DetailViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        if let reviews = reviews {
+            
+            return reviews.count
+        } else {
+            return 0
+        }
+        
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("ReviewCell", forIndexPath: indexPath) as! ReviewCell
+        
+        cell.review = reviews![indexPath.row]
+        
+        
+        
+        return cell
+        
+    }
 
     /*
     // MARK: - Navigation
