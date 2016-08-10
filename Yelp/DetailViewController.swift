@@ -52,8 +52,11 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         
         Business.businessWithID(business!.dictionary!["id"] as! String, completion: { (business: NSDictionary!, error: NSError!) -> Void in
            print("helllloeweifwooweieieieieiieieieiieieiieieieiieieiieieieie")
-            print("business: \(business)")
+            //print("business: \(business)")
             
+            self.reviews = business["reviews"] as! [NSDictionary]
+            self.tableView.reloadData()
+            print("reviews: \(self.reviews!)")
             if let error = error {
                 print("Error: \(error)")
             }
@@ -63,7 +66,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         
         
         
-        print(business!.dictionary!["id"] as! String)
+        //print(business!.dictionary!["id"] as! String)
         
         
         print("hey right before the reviews")

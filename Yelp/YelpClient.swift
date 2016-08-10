@@ -113,7 +113,6 @@ class YelpClient: BDBOAuth1RequestOperationManager {
         print("yelp about to get")
         print("id: \(id)")
         return self.GET("business/\(id)", parameters: parameters, success: { (operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
-            print("inside retuuuuuuuuurn")
             let dictionary = response as? NSDictionary
             if dictionary != nil {
                 print("dictionary not equal nil")

@@ -23,6 +23,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         // Do any additional setup after loading the view.
         
         let centerLocation = CLLocation(latitude: 37.785771, longitude: -122.406165)
+        
         goToLocation(centerLocation)
         
         Business.searchWithTerm("Thai", completion: { (businesses: [Business]!, error: NSError!) -> Void in
