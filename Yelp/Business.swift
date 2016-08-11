@@ -113,6 +113,11 @@ class Business: NSObject {
         
     }
     
+    /*class func searchWithTerm(term: String, categories: Int, completion: ([Business]!, NSError!) -> Void) {
+        YelpClient.sharedInstance.searchWithTerm(term, categories: categories, completion: completion)
+        
+    } */
+    
     class func businessWithID(id: String, completion: (NSDictionary!, NSError!) -> Void) {
         print("business class reached")
         YelpClient.sharedInstance.businessWithID(id, completion: completion)

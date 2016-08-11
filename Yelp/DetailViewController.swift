@@ -27,10 +27,18 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     
     @IBOutlet weak var tableView: UITableView!
     
+    @IBOutlet weak var tableControl: UISegmentedControl!
+    
     var business : Business?
     
     var reviews: [NSDictionary]?
-
+    
+    var similar: [Business]? = []
+    
+    var categories: [String]? = []
+    
+    var controlVal = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -50,6 +58,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         
         ratingsView.setImageWithURL(business!.ratingImageURL!)
         
+        
         Business.businessWithID(business!.dictionary!["id"] as! String, completion: { (business: NSDictionary!, error: NSError!) -> Void in
            print("helllloeweifwooweieieieieiieieieiieieiieieieiieieiieieieie")
             //print("business: \(business)")
@@ -63,6 +72,28 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
             
         })
         
+        var categoryArray = business!.dictionary!["categories"] as! [[String]]
+        
+        for category in categoryArray {
+            self.categories!.append(category[1])
+        }
+        
+        Business.searchWithTerm("Thai", sort: nil, categories: self.categories, deals: nil, completion: { (businesses: [Business]?, error: NSError?) -> Void in
+            if let businesses = businesses {
+                print("success")
+                for business in businesses {
+                    self.similar!.append(business)
+                }
+                //self.isMoreDataLoading = false
+                print("simliar1: \(self.similar!)")
+                //self.businesses = businesses
+                self.tableView.reloadData()
+            } else if let error = error {
+                print("error: \(error)")
+            }
+            
+        })
+
         
         
         
@@ -88,26 +119,80 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print("rows tableControl: \(controlVal)")
         
-        if let reviews = reviews {
-            
-            return reviews.count
-        } else {
-            return 0
+        if controlVal == 0 {
+            print("table control is 0")
+            if let reviews = reviews {
+                print("hello you reached 0 count: \(reviews.count)")
+                return reviews.count
+            } else {
+                return 0
+            }
         }
+        
+        if controlVal == 1 {
+            if let similar = similar {
+                return similar.count
+            } else {
+                return 0
+            }
+            
+        }
+        
+        if controlVal == 2 {
+            
+            
+        }
+        
+        return 0
+    }
+    
+    
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        if controlVal == 0 {
+            print("new review cell")
+            let cell = tableView.dequeueReusableCellWithIdentifier("ReviewCell", forIndexPath: indexPath) as! ReviewCell
+            
+            cell.review = reviews![indexPath.row]
+            
+            
+            
+            return cell
+        }
+        
+        if controlVal == 1 {
+            print("new similar cell")
+            
+            let cell = tableView.dequeueReusableCellWithIdentifier("BusinessCell", forIndexPath: indexPath) as! BusinessCell
+            print("wow")
+            print("similar: \(similar!)")
+            print("indexPath: \(indexPath)")
+            print("single similar: \(similar![indexPath.row])")
+            cell.business = similar![indexPath.row]
+            print("crzay")
+            return cell
+            
+            
+        }
+        
+        if controlVal == 2 {
+            
+            
+        }
+        
+        let cell = tableView.dequeueReusableCellWithIdentifier("BusinessCell")
+        
+        return cell!
         
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("ReviewCell", forIndexPath: indexPath) as! ReviewCell
-        
-        cell.review = reviews![indexPath.row]
-        
-        
-        
-        return cell
-        
+    @IBAction func onControlChange(sender: AnyObject) {
+        controlVal = tableControl.selectedSegmentIndex
+        tableView.reloadData()
     }
+    
 
     /*
     // MARK: - Navigation
