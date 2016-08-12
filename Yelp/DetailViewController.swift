@@ -51,6 +51,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
             
         }
         
+        
         categoriesLabel.text = business!.categories
         
         addressLabel.text = business!.address
@@ -60,12 +61,12 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         
         
         Business.businessWithID(business!.dictionary!["id"] as! String, completion: { (business: NSDictionary!, error: NSError!) -> Void in
-           print("helllloeweifwooweieieieieiieieieiieieiieieieiieieiieieieie")
-            //print("business: \(business)")
+           //print("helllloeweifwooweieieieieiieieieiieieiieieieiieieiieieieie")
+            print("business: \(business)")
             
             self.reviews = business["reviews"] as! [NSDictionary]
             self.tableView.reloadData()
-            print("reviews: \(self.reviews!)")
+            //print("reviews: \(self.reviews!)")
             if let error = error {
                 print("Error: \(error)")
             }
@@ -80,12 +81,12 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         
         Business.searchWithTerm("Thai", sort: nil, categories: self.categories, deals: nil, completion: { (businesses: [Business]?, error: NSError?) -> Void in
             if let businesses = businesses {
-                print("success")
+                //print("success")
                 for business in businesses {
                     self.similar!.append(business)
                 }
                 //self.isMoreDataLoading = false
-                print("simliar1: \(self.similar!)")
+                //print("simliar1: \(self.similar!)")
                 //self.businesses = businesses
                 self.tableView.reloadData()
             } else if let error = error {
@@ -100,7 +101,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         //print(business!.dictionary!["id"] as! String)
         
         
-        print("hey right before the reviews")
+        //print("hey right before the reviews")
         //reviews = business!.dictionary!["reviews"] as! [NSDictionary]
         
         tableView.reloadData()
@@ -119,12 +120,12 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("rows tableControl: \(controlVal)")
+        //print("rows tableControl: \(controlVal)")
         
         if controlVal == 0 {
-            print("table control is 0")
+            //print("table control is 0")
             if let reviews = reviews {
-                print("hello you reached 0 count: \(reviews.count)")
+                //print("hello you reached 0 count: \(reviews.count)")
                 return reviews.count
             } else {
                 return 0
@@ -152,7 +153,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if controlVal == 0 {
-            print("new review cell")
+            //print("new review cell")
             let cell = tableView.dequeueReusableCellWithIdentifier("ReviewCell", forIndexPath: indexPath) as! ReviewCell
             
             cell.review = reviews![indexPath.row]
@@ -163,15 +164,15 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         }
         
         if controlVal == 1 {
-            print("new similar cell")
+            //print("new similar cell")
             
             let cell = tableView.dequeueReusableCellWithIdentifier("BusinessCell", forIndexPath: indexPath) as! BusinessCell
-            print("wow")
-            print("similar: \(similar!)")
-            print("indexPath: \(indexPath)")
-            print("single similar: \(similar![indexPath.row])")
+            //print("wow")
+            //print("similar: \(similar!)")
+            //print("indexPath: \(indexPath)")
+            //print("single similar: \(similar![indexPath.row])")
             cell.business = similar![indexPath.row]
-            print("crzay")
+            //print("crzay")
             return cell
             
             

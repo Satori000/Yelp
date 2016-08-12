@@ -190,7 +190,6 @@
                                         <segments>
                                             <segment title="Reviews"/>
                                             <segment title="Similar"/>
-                                            <segment title=""/>
                                         </segments>
                                         <connections>
                                             <action selector="onControlChange:" destination="kOr-eC-exH" eventType="valueChanged" id="rc8-9n-QFR"/>

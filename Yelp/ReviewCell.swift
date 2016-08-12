@@ -24,21 +24,21 @@ class ReviewCell: UITableViewCell {
         
         didSet{
             //nameLabel.text = business.name
-           print("review cell review: \(review)")
-            print("before label")
+           //print("review cell review: \(review)")
+            //print("before label")
             let user = review["user"] as! NSDictionary
             
             usernameLabel.text = user["name"] as! String
             
             ratingsView.setImageWithURL(NSURL(string: review["rating_image_url"] as! String)!)
             var timeCreated = NSDate(timeIntervalSince1970: review["time_created"] as! Double)
-            print("elapsed time: \(timeElapsed(timeCreated))")
-            print("time created: \(timeCreated)")
-            print("before content")
+            //print("elapsed time: \(timeElapsed(timeCreated))")
+            //print("time created: \(timeCreated)")
+            //print("before content")
             contentLabel.text = review["excerpt"] as! String
             
             
-            print("before image")
+            //print("before image")
             userImageView.setImageWithURL(NSURL(string: user["image_url"] as! String)!)
             
             timestampLabel.text = timeElapsed(timeCreated)

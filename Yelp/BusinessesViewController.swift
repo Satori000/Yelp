@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import AZDropdownMenu
 
-class BusinessesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
+class BusinessesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, UISearchBarDelegate {
 
     var businesses: [Business]!
     var searchController: UISearchController!
@@ -16,16 +17,31 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
     @IBOutlet weak var tableView: UITableView!
     var filteredData: [String]!
     var isMoreDataLoading = false
+    var searchResults: [Business]?
     
+    var menu: AZDropdownMenu?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //let sorts = ["By Relevance", "By Distance", "By Rating"]
+        
+      /*  menu = AZDropdownMenu(titles: sorts)
+        
+        let button = UIBarButtonItem(image: UIImage(named: "menuSmall"), style: .Plain, target: self, action: "showDropdown")
+        
+        
+        navigationItem.leftBarButtonItem = button
+        
+        menu!.cellTapHandler = { [weak self] (indexPath: NSIndexPath) -> Void in
+            print("hello")
+        } */
         
         searchBar = UISearchBar()
         searchBar.sizeToFit()
         navigationItem.titleView = searchBar
+        (self.navigationItem.titleView as! UISearchBar).delegate = self
+
         
-            
             
             
         tableView.delegate = self
@@ -66,6 +82,11 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
+        if searchResults != nil {
+            
+            return searchResults!.count
+        }
+        
         if businesses != nil {
             print(businesses!.count)
             
@@ -80,10 +101,15 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         print("BEFORE cell initialized")
+        if searchResults != nil {
+            let cell = tableView.dequeueReusableCellWithIdentifier("BusinessCell", forIndexPath: indexPath) as! BusinessCell
+            cell.business = searchResults![indexPath.row]
 
+            return cell
+        }
+        
         let cell = tableView.dequeueReusableCellWithIdentifier("BusinessCell", forIndexPath: indexPath) as! BusinessCell
-        //print("BEFORE business set")
-        //print("index path: \(indexPath), count: \(businesses!.count)")
+       
         cell.business = businesses[indexPath.row]
         
         //print("dictionary \(cell.business.dictionary!)")
@@ -139,6 +165,59 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
            
         })
         
+    }
+    
+    /*func showDropdown() {
+        if (self.menu?.isDescendantOfView(self.view) == true) {
+            self.menu?.hideMenu()
+        } else {
+            self.menu?.showMenuFromView(self.view)
+        }
+    } */
+    
+    
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        var query = searchBar.text! as! String
+        
+        if query == "" {
+            
+            searchResults = nil
+            tableView.reloadData()
+            
+            
+            
+        } else {
+            if let businesses = businesses {
+                
+                searchResults = []
+                
+                for business in businesses {
+                    
+                    let name = business.name!
+                    
+                    if name.containsString(query) {
+                        
+                        searchResults!.append(business)
+                        
+                        
+                    }
+                    
+                }
+                
+                tableView.reloadData()
+                
+            }
+            
+        }
+        //let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
+        //view.addGestureRecognizer(tap)
+    }
+    
+    func searchBarTextDidEndEditing(searchBar: UISearchBar) {
+        searchResults = nil
+        
+        tableView.reloadData()
     }
     
     
