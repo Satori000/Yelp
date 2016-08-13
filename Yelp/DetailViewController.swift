@@ -8,6 +8,7 @@
 
 import UIKit
 import AFNetworking
+import MapKit
 
 class DetailViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
@@ -24,6 +25,8 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     @IBOutlet weak var reviewCountLabel: UILabel!
     
     @IBOutlet weak var distanceLabel: UILabel!
+    
+    @IBOutlet weak var phoneButton: UIButton!
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -61,15 +64,19 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         reviewCountLabel.text = "\(business!.reviewCount!) Reviews"
         
         ratingsView.setImageWithURL(business!.ratingImageURL!)
+        phoneButton.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Left
         
-        //print(self.business!.dictionary!)
+        phoneButton.setTitle(business!.dictionary!["display_phone"] as! String, forState: .Normal)
+        
+       
+        print(self.business!.dictionary!)
         Business.businessWithID(business!.dictionary!["id"] as! String, completion: { (business: NSDictionary!, error: NSError!) -> Void in
            //print("helllloeweifwooweieieieieiieieieiieieiieieieiieieiieieieie")
             //print("business: \(business)")
             
             self.reviews = business["reviews"] as! [NSDictionary]
             self.tableView.reloadData()
-            print("reviews: \(self.reviews!)")
+            //print("reviews: \(self.reviews!)")
             if let error = error {
                 print("Error: \(error)")
             }
@@ -196,7 +203,36 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         tableView.reloadData()
     }
     
+    
 
+    @IBAction func onPressPhone(sender: AnyObject) {
+     
+        UIApplication.sharedApplication().openURL(NSURL(string: "tel://\(business!.dictionary!["phone"] as! String)")!)
+    }
+    
+    @IBAction func onTapAddress(sender: AnyObject) {
+        print("hello")
+        //"37.785771,-122.406165"
+        let location = business!.dictionary!["location"] as! NSDictionary
+        let coordinates = location["coordinate"] as! NSDictionary
+        
+        let endCoordinate = CLLocationCoordinate2DMake(coordinates["latitude"] as! Double, coordinates["longitude"] as! Double)
+        
+        let startCoordinate = CLLocationCoordinate2DMake(37.785771, -122.406165)
+        
+        let mapItemSource = MKMapItem(placemark: MKPlacemark(coordinate: startCoordinate, addressDictionary: nil) )
+        
+        let mapItemDestination = MKMapItem(placemark: MKPlacemark(coordinate: endCoordinate, addressDictionary:nil))
+        mapItemDestination.name = business!.name!
+        mapItemSource.name = "Current Location"
+        let launchOptions:NSDictionary = NSDictionary(object: MKLaunchOptionsDirectionsModeDriving, forKey: MKLaunchOptionsDirectionsModeKey)
+
+        MKMapItem.openMapsWithItems([mapItemSource, mapItemDestination], launchOptions: launchOptions as! [String : AnyObject])
+        //mapItem.openInMapsWithLaunchOptions([MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving])
+        
+    }
+  
+    
     
     // MARK: - Navigation
 
