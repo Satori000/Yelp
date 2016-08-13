@@ -17,12 +17,14 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
     @IBOutlet weak var tableView: UITableView!
     var filteredData: [String]!
     var isMoreDataLoading = false
+    var loadingMoreView:InfiniteScrollActivityView?
     var searchResults: [Business]?
     
     var menu: AZDropdownMenu?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         //let sorts = ["By Relevance", "By Distance", "By Rating"]
         
       /*  menu = AZDropdownMenu(titles: sorts)
@@ -48,6 +50,15 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
         tableView.dataSource = self
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 120
+        
+        let frame = CGRectMake(0, tableView.contentSize.height, tableView.bounds.size.width, InfiniteScrollActivityView.defaultHeight)
+        loadingMoreView = InfiniteScrollActivityView(frame: frame)
+        loadingMoreView!.hidden = true
+        tableView.addSubview(loadingMoreView!)
+        
+        var insets = tableView.contentInset;
+        insets.bottom += InfiniteScrollActivityView.defaultHeight;
+        tableView.contentInset = insets
         
         
         Business.searchWithTerm("Thai", completion: { (businesses: [Business]!, error: NSError!) -> Void in
@@ -129,6 +140,11 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
 
             // When the user has scrolled past the threshold, start requesting
             if(scrollView.contentOffset.y > scrollOffsetThreshold && tableView.dragging) {
+              
+               let frame = CGRectMake(0, tableView.contentSize.height, tableView.bounds.size.width, InfiniteScrollActivityView.defaultHeight)
+                loadingMoreView?.frame = frame
+                loadingMoreView!.startAnimating()
+                
                 isMoreDataLoading = true
                  //print("hello1")
                 loadMoreData()
@@ -151,6 +167,8 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
          //print("hello2")
         Business.searchWithTerm("Thai", offset: businesses.count, completion: { (businesses: [Business]?, error: NSError?) -> Void in
             if let businesses = businesses {
+                self.loadingMoreView!.stopAnimating()
+
                 print("success")
                 for business in businesses {
                     self.businesses.append(business)
