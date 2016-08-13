@@ -23,7 +23,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     
     @IBOutlet weak var reviewCountLabel: UILabel!
     
-    @IBOutlet weak var snippetLabel: UILabel!
+    @IBOutlet weak var distanceLabel: UILabel!
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -45,12 +45,15 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         tableView.delegate = self
         tableView.dataSource = self
         
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 120
+
         nameLabel.text = business!.name
         if business!.imageURL != nil {
             thumnailView.setImageWithURL(business!.imageURL!)
             
         }
-        
+        distanceLabel.text = business!.distance!
         
         categoriesLabel.text = business!.categories
         
@@ -59,14 +62,14 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         
         ratingsView.setImageWithURL(business!.ratingImageURL!)
         
-        
+        //print(self.business!.dictionary!)
         Business.businessWithID(business!.dictionary!["id"] as! String, completion: { (business: NSDictionary!, error: NSError!) -> Void in
            //print("helllloeweifwooweieieieieiieieieiieieiieieieiieieiieieieie")
-            print("business: \(business)")
+            //print("business: \(business)")
             
             self.reviews = business["reviews"] as! [NSDictionary]
             self.tableView.reloadData()
-            //print("reviews: \(self.reviews!)")
+            print("reviews: \(self.reviews!)")
             if let error = error {
                 print("Error: \(error)")
             }
@@ -109,7 +112,6 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         //distanceLabel.text = business.distance
 
         
-        snippetLabel.text = business!.snippetText
         
         // Do any additional setup after loading the view.
     }
@@ -195,14 +197,19 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        let similarDetailView = segue.destinationViewController as! DetailViewController
+        let sendingBusiness = (sender as! BusinessCell).business
+        
+        similarDetailView.business = sendingBusiness
+        
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
     }
-    */
+    
 
 }
