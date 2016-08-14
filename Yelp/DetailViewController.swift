@@ -17,9 +17,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     @IBOutlet weak var nameLabel: UILabel!
     
     @IBOutlet weak var ratingsView: UIImageView!
-    
-    @IBOutlet weak var addressLabel: UILabel!
-    
+        
     @IBOutlet weak var categoriesLabel: UILabel!
     
     @IBOutlet weak var reviewCountLabel: UILabel!
@@ -27,6 +25,8 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     @IBOutlet weak var distanceLabel: UILabel!
     
     @IBOutlet weak var phoneButton: UIButton!
+    
+    @IBOutlet weak var addressButton: UIButton!
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -60,7 +60,6 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         
         categoriesLabel.text = business!.categories
         
-        addressLabel.text = business!.address
         reviewCountLabel.text = "\(business!.reviewCount!) Reviews"
         
         ratingsView.setImageWithURL(business!.ratingImageURL!)
@@ -68,6 +67,9 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         
         phoneButton.setTitle(business!.dictionary!["display_phone"] as! String, forState: .Normal)
         
+        addressButton.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Left
+        
+        addressButton.setTitle(business!.address, forState: .Normal)
        
         print(self.business!.dictionary!)
         Business.businessWithID(business!.dictionary!["id"] as! String, completion: { (business: NSDictionary!, error: NSError!) -> Void in

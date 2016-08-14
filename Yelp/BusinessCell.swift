@@ -36,6 +36,9 @@ class BusinessCell: UITableViewCell {
             if business.imageURL != nil {
                 thumbnailView.setImageWithURL(business.imageURL!)
 
+            } else {
+                
+                thumbnailView.image = UIImage(imageLiteral: "default-restaurant-icon")
             }
             //thumbnailView.setImageWithURL(business.imageURL!)
             print("before categories")
@@ -48,7 +51,7 @@ class BusinessCell: UITableViewCell {
 
             reviewsLabel.text = "\(business.reviewCount!) Reviews"
             print("before ratings")
-
+            
             ratingsView.setImageWithURL(business.ratingImageURL!)
             print("before distance")
             
